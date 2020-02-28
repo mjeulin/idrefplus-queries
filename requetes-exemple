@@ -1,60 +1,84 @@
-Nombre de comptes “FR” :
+<--Requête pour avoir le nombre de comptes “FR” : -->
 
-select count distinct ?aut
-
-from <http://hub.abes.fr/referentiel/orcid2018/fr>
-
-from <http://hub.abes.fr/referentiel/orcid2018/summaries>
-
- where {
-
-?aut <http://www.geonames.org/ontology#countryCode>     "FR".
-
+SELECT COUNT DISTINCT ?aut
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
 ?aut foaf:givenName ?prenom.
-
 ?aut foaf:familyName ?nom.
-
 }
 ________________________________________________________________________________________________________________________________________
 
-Nombre de comptes “FR” sans doc :
+<--Requête pour avoir le nombre de comptes “FR” sans doc : -->
 
-select count distinct ?aut
-
-from <http://hub.abes.fr/referentiel/orcid2018/fr>
-
-from <http://hub.abes.fr/referentiel/orcid2018/summaries>
-
- where {
-
-?aut <http://www.geonames.org/ontology#countryCode>     "FR".
-
+SELECT COUNT DISTINCT ?aut
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
 ?aut foaf:givenName ?prenom.
-
 ?aut foaf:familyName ?nom.
-
 FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
-
 }
 
-________________________________________________________________________________________________________________________________________
-
-Les comptes “FR”  avec documents :
-
-select count distinct ?aut
-
-from <http://hub.abes.fr/referentiel/orcid2018/fr>
-
-from <http://hub.abes.fr/referentiel/orcid2018/summaries>
-
- where {
-
-?aut <http://www.geonames.org/ontology#countryCode>     "FR".
-
+<--Requête pour avoir le nombre de comptes “FR” avec documents : -->
+SELECT COUNT DISTINCT ?aut
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
 ?aut foaf:givenName ?prenom.
-
 ?aut foaf:familyName ?nom.
-
 ?doc dcterms:contributor ?aut.
-
 }
+
+<--Requête pour compter tous les comptes ORCID présents dans la base ; plus de 5 millions le 26/02/2020 -->
+SELECT COUNT (?compte)
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+
+WHERE {?compte a foaf:PersonalProfileDocument}
+
+<--Requête pour avoir la liste de tous les chercheurs affiliés à une org dont le nom comporte "cirad" (quelle que soit la casse) avec leur nom et prénom ; OK le 28/02/2020 -->
+
+SELECT *
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+
+WHERE
+{
+?gus  org:memberOf ?org ; foaf:familyName ?nomgus ; foaf:givenName ?prenom.
+?org foaf:name ?nom.
+FILTER CONTAINS (LCASE(?nom), "cirad")
+}
+
+<--Requête pour avoir le nombre de tous les chercheurs affiliés à une org dont le nom comporte "cirad" (quelle que soit la casse) ; 238 le 26/02/2020-->
+
+SELECT COUNT DISTINCT ?gus
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+
+WHERE
+{
+?gus  org:memberOf ?org.
+?org foaf:name ?nom.
+FILTER CONTAINS (LCASE(?nom), "cirad")
+}
+
+<--Requête pour avoir la liste de tous les chercheurs affiliés à l'uri <http://hub.abes.fr/orcid/org/CIRAD> avec leur nom et prénom ; OK le 26/02/2020-->
+
+SELECT *
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+
+WHERE {?gus org:memberOf <http://hub.abes.fr/orcid/org/CIRAD> ; foaf:familyName ?nom ; foaf:givenName ?prenom.}
+
+<--Requête pour avoir le nombre de tous les chercheurs affiliés à l'uri <http://hub.abes.fr/orcid/org/CIRAD> ; 85 le 26/02/2020-->
+
+SELECT COUNT DISTINCT ?gus
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
+FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
+
+WHERE {?gus org:memberOf <http://hub.abes.fr/orcid/org/CIRAD>.}
+
