@@ -1,4 +1,4 @@
-<--Requête pour avoir le nombre de comptes “FR” : -->
+<--Requête pour avoir le nombre de comptes “FR” : 78124 le 26/02/2020 -->
 
 SELECT COUNT DISTINCT ?aut
 FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
@@ -8,9 +8,8 @@ WHERE {
 ?aut foaf:givenName ?prenom.
 ?aut foaf:familyName ?nom.
 }
-________________________________________________________________________________________________________________________________________
 
-<--Requête pour avoir le nombre de comptes “FR” sans doc : -->
+<--Requête pour avoir le nombre de comptes “FR” sans doc : 30 577 le 26/02/2020 -->
 
 SELECT COUNT DISTINCT ?aut
 FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
@@ -22,7 +21,7 @@ WHERE {
 FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
 }
 
-<--Requête pour avoir le nombre de comptes “FR” avec documents : -->
+<--Requête pour avoir le nombre de comptes “FR” avec documents : 47 547 comptes le 26/02/2020 -->
 SELECT COUNT DISTINCT ?aut
 FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
