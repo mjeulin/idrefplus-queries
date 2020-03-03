@@ -1,6 +1,7 @@
 <--Requête pour avoir le nombre de comptes “FR” : 78124 le 26/02/2020 -->
 
 SELECT COUNT DISTINCT ?aut
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 WHERE {
@@ -12,6 +13,7 @@ WHERE {
 <--Requête pour avoir le nombre de comptes “FR” sans doc : 30 577 le 26/02/2020 -->
 
 SELECT COUNT DISTINCT ?aut
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 WHERE {
@@ -23,6 +25,7 @@ FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
 
 <--Requête pour avoir le nombre de comptes “FR” avec documents : 47 547 comptes le 26/02/2020 -->
 SELECT COUNT DISTINCT ?aut
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 WHERE {
@@ -34,6 +37,7 @@ WHERE {
 
 <--Requête pour compter tous les comptes ORCID présents dans la base ; plus de 5 millions le 26/02/2020 -->
 SELECT COUNT (?compte)
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 
@@ -42,6 +46,7 @@ WHERE {?compte a foaf:PersonalProfileDocument}
 <--Requête pour avoir la liste de tous les chercheurs affiliés à une org dont le nom comporte "cirad" (quelle que soit la casse) avec leur nom et prénom ; OK le 28/02/2020 -->
 
 SELECT *
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 
@@ -55,6 +60,7 @@ FILTER CONTAINS (LCASE(?nom), "cirad")
 <--Requête pour avoir le nombre de tous les chercheurs affiliés à une org dont le nom comporte "cirad" (quelle que soit la casse) ; 238 le 26/02/2020-->
 
 SELECT COUNT DISTINCT ?gus
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 
@@ -68,6 +74,7 @@ FILTER CONTAINS (LCASE(?nom), "cirad")
 <--Requête pour avoir la liste de tous les chercheurs affiliés à l'uri <http://hub.abes.fr/orcid/org/CIRAD> avec leur nom et prénom ; OK le 26/02/2020-->
 
 SELECT *
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 
@@ -76,6 +83,7 @@ WHERE {?gus org:memberOf <http://hub.abes.fr/orcid/org/CIRAD> ; foaf:familyName 
 <--Requête pour avoir le nombre de tous les chercheurs affiliés à l'uri <http://hub.abes.fr/orcid/org/CIRAD> ; 85 le 26/02/2020-->
 
 SELECT COUNT DISTINCT ?gus
+FROM <http://hub.abes.fr/referentiel/orcid2018/fr>
 FROM <http://hub.abes.fr/referentiel/orcid2018/activities>
 FROM <http://hub.abes.fr/referentiel/orcid2018/summaries>
 
