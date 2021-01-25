@@ -82,3 +82,7 @@ SELECT DISTINCT * where {
 
 select * where {<http://hub.abes.fr/orcid/work/24686525> ?p ?o.} limit 500
 
+<--Requête pour obtenir les documents ayant un DOI -->
+
+SELECT  count(?docorcid)
+WHERE { ?docorcid <http://purl.org/ontology/bibo/doi> ?doiorcid }
