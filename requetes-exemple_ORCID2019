@@ -1,0 +1,81 @@
+<--Requête pour compter tous les comptes ORCID présents dans la base ; plus de 6 millions le 01/2021 -->
+
+SELECT COUNT (?compte)
+WHERE {?compte a foaf:PersonalProfileDocument}
+
+
+<--Requête pour compter tous les documents présents dans la base ; plus de 42 millions le 01/2021 -->
+
+SELECT COUNT (?doc)
+WHERE {?doc a bibo:Document}
+
+
+<--Requête pour avoir le nombre de comptes “FR” : 118 000 le 01/2021 -->
+
+SELECT COUNT DISTINCT ?aut
+FROM <http://idref.abes.fr/orcid2019/fr>
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+}
+
+
+<--Requête pour avoir le nombre de comptes “FR” sans doc : 52 000 le 01/2021 -->
+
+SELECT COUNT DISTINCT ?aut
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
+}
+
+
+<--Requête pour avoir un échantillon de comptes “FR” sans doc -->
+
+SELECT *
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
+} LIMIT 500
+
+
+<--Requête pour avoir le nombre de comptes “FR” avec documents : 48 000 comptes le 01/2021 -->
+
+SELECT COUNT DISTINCT ?aut
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+?doc dcterms:contributor ?aut.
+}
+
+
+<--Requête pour avoir un échantillon de comptes “FR” avec documents -->
+
+SELECT *
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+?doc dcterms:contributor ?aut.
+} LIMIT 500
+
+
+<--Requête pour obtenir les données des documents -->
+
+SELECT DISTINCT * where {
+?doc <http://purl.org/dc/terms/contributor> ?contributor.
+?doc <http://purl.org/dc/terms/issued> ?date.
+?doc <http://purl.org/dc/terms/title> ?titre.
+?doc <http://purl.org/ontology/bibo/doi> ?doi.
+} limit 500
+
+
+<--Requête pour obtenir les données relatives à un document "work" -->
+
+select * where {<http://hub.abes.fr/orcid/work/24686525> ?p ?o.} limit 500
+
