@@ -15,8 +15,6 @@ WHERE {?doc a bibo:Document}
 SELECT COUNT DISTINCT ?aut
 WHERE {
 ?aut <http://www.geonames.org/ontology#countryCode> "FR".
-?aut foaf:givenName ?prenom.
-?aut foaf:familyName ?nom.
 }
 
 
