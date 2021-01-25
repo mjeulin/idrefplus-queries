@@ -13,7 +13,6 @@ WHERE {?doc a bibo:Document}
 <--Requête pour avoir le nombre de comptes “FR” : 118 000 le 01/2021 -->
 
 SELECT COUNT DISTINCT ?aut
-FROM <http://idref.abes.fr/orcid2019/fr>
 WHERE {
 ?aut <http://www.geonames.org/ontology#countryCode> "FR".
 ?aut foaf:givenName ?prenom.
