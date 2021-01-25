@@ -4,10 +4,10 @@ SELECT COUNT (?compte)
 WHERE {?compte a foaf:PersonalProfileDocument}
 
 
-<--Requête pour compter tous les documents présents dans la base ; plus de 42 millions le 01/2021 -->
+<--Requête pour obtenir les données relatives à un compte -->
 
-SELECT COUNT (?doc)
-WHERE {?doc a bibo:Document}
+SELECT * 
+WHERE {<http://orcid.org/0000-0003-0885-7933#person> ?p ?o.} limit 500
 
 
 <--Requête pour avoir le nombre de comptes “FR” : 118 000 le 01/2021 -->
@@ -60,6 +60,12 @@ WHERE {
 ?aut foaf:familyName ?nom.
 ?doc dcterms:contributor ?aut.
 } LIMIT 500
+
+
+<--Requête pour compter tous les documents présents dans la base ; plus de 42 millions le 01/2021 -->
+
+SELECT COUNT (?doc)
+WHERE {?doc a bibo:Document}
 
 
 <--Requête pour obtenir les données des documents -->
