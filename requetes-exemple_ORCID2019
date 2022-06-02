@@ -14,7 +14,7 @@ WHERE {<http://orcid.org/0000-0003-0885-7933#person> ?p ?o.} limit 500
 
 SELECT COUNT DISTINCT ?aut
 WHERE {
-?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut <https://www.geonames.org/ontology#countryCode> "FR".
 }
 
 
@@ -33,7 +33,7 @@ FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
 
 SELECT *
 WHERE {
-?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut <https://www.geonames.org/ontology#countryCode> "FR".
 ?aut foaf:givenName ?prenom.
 ?aut foaf:familyName ?nom.
 FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
@@ -44,7 +44,7 @@ FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
 
 SELECT COUNT DISTINCT ?aut
 WHERE {
-?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut <https://www.geonames.org/ontology#countryCode> "FR".
 ?aut foaf:givenName ?prenom.
 ?aut foaf:familyName ?nom.
 ?doc dcterms:contributor ?aut.
