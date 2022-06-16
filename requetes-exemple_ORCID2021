@@ -1,3 +1,5 @@
+!! REQUETES A METTRE A JOUR
+
 <--Requête pour compter tous les comptes ORCID présents dans la base ; plus de 13 millions le 16/06/2022 -->
 
 SELECT COUNT (?compte)
@@ -55,16 +57,16 @@ WHERE {
 
 SELECT *
 WHERE {
-?aut <http://www.geonames.org/ontology#countryCode> "FR".
-?aut foaf:givenName ?prenom.
-?aut foaf:familyName ?nom.
-?doc dcterms:contributor ?aut.
+?aut <https://www.geonames.org/ontology#countryCode> "FR".
+?aut <http://xmlns.com/foaf/0.1/givenName> ?prenom.
+?aut <http://xmlns.com/foaf/0.1/familyName> ?nom.
+?doc <http://purl.org/dc/terms/contributor> ?aut.
 } LIMIT 500
 
 
 <--Requête pour compter tous les documents présents dans la base ; 73 millions le 16/06/2022 -->
 
-SELECT COUNT (?doc)
+SELECT COUNT (DISTINCT ?doc)
 WHERE {?doc a bibo:Document}
 
 
