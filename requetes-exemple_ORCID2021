@@ -1,0 +1,88 @@
+<--Requête pour compter tous les comptes ORCID présents dans la base ; plus de 13 millions le 16/06/2022 -->
+
+SELECT COUNT (?compte)
+WHERE {?compte a foaf:PersonalProfileDocument}
+
+
+<--Requête pour obtenir les données relatives à un compte -->
+
+SELECT * 
+WHERE {<http://orcid.org/0000-0003-0885-7933#person> ?p ?o.} limit 500
+
+
+<--Requête pour avoir le nombre de comptes “FR” : XXX le 16/06/2022 -->
+
+SELECT COUNT DISTINCT ?aut
+WHERE {
+?aut <https://www.geonames.org/ontology#countryCode> "FR".
+}
+
+
+<--Requête pour avoir le nombre de comptes “FR” sans doc : XXX le 16/06/2022 -->
+
+SELECT COUNT DISTINCT ?aut
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
+}
+
+
+<--Requête pour avoir un échantillon de comptes “FR” sans doc -->
+
+SELECT *
+WHERE {
+?aut <https://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+FILTER NOT EXISTS {?doc dcterms:contributor ?aut. }
+} LIMIT 500
+
+
+<--Requête pour avoir le nombre de comptes “FR” avec documents : XXX le 16/06/2022 -->
+
+SELECT COUNT DISTINCT ?aut
+WHERE {
+?aut <https://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+?doc dcterms:contributor ?aut.
+}
+
+
+<--Requête pour avoir un échantillon de comptes “FR” avec documents -->
+
+SELECT *
+WHERE {
+?aut <http://www.geonames.org/ontology#countryCode> "FR".
+?aut foaf:givenName ?prenom.
+?aut foaf:familyName ?nom.
+?doc dcterms:contributor ?aut.
+} LIMIT 500
+
+
+<--Requête pour compter tous les documents présents dans la base ; XXX le 16/06/2022 -->
+
+SELECT COUNT (?doc)
+WHERE {?doc a bibo:Document}
+
+
+<--Requête pour obtenir les données des documents -->
+
+SELECT DISTINCT * where {
+?doc <http://purl.org/dc/terms/contributor> ?contributor.
+?doc <http://purl.org/dc/terms/issued> ?date.
+?doc <http://purl.org/dc/terms/title> ?titre.
+?doc <http://purl.org/ontology/bibo/doi> ?doi.
+} limit 500
+
+
+<--Requête pour obtenir les données relatives à un document "work" -->
+
+select * where {<http://hub.abes.fr/orcid/work/24686525> ?p ?o.} limit 500
+
+<--Requête pour obtenir les documents ayant un DOI -->
+
+SELECT  count(?docorcid)
+WHERE { ?docorcid <http://purl.org/ontology/bibo/doi> ?doiorcid }
