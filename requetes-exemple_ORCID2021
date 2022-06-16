@@ -62,7 +62,7 @@ WHERE {
 } LIMIT 500
 
 
-<--Requête pour compter tous les documents présents dans la base ; XXX le 16/06/2022 -->
+<--Requête pour compter tous les documents présents dans la base ; 73 millions le 16/06/2022 -->
 
 SELECT COUNT (?doc)
 WHERE {?doc a bibo:Document}
