@@ -82,7 +82,7 @@ SELECT DISTINCT * where {
 
 select * where {<http://hub.abes.fr/orcid/work/24686525> ?p ?o.} limit 500
 
-<--Requête pour obtenir les documents ayant un DOI -->
+<--Requête pour compter les documents ayant un DOI ; 26 429 934 millions le 16/06/2022-->
 
 SELECT  count(?docorcid)
 WHERE { ?docorcid <http://purl.org/ontology/bibo/doi> ?doiorcid }
